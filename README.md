@@ -1,18 +1,25 @@
 # mqldt-c
-This repository contains the Containerized version of mqldt
+This repository contains the Containerized version of mqldt.
 
-It consists of a Dockerfile to create the docker image.
+It consists of a Dockerfile to create the docker image, mqldt binary executable and scripts to run a set of MQLDT tests.
 
-It contains an mqldt binary executable compiled in February 2020 on x64. Obviously this can be updated with one built from the mqldt repo [here](https://github.com/ibm-messaging/mqldt)
+The mqldt binary executable compiled in February 2020 on x64. Obviously this can be updated with one built from the mqldt repo [here](https://github.com/ibm-messaging/mqldt).
 
-The image is available [here](http://dontyetknowwheretohost.theimage.com)
+The image is available [here](http://dontyetknowwheretohost.theimage.com).
 
-To run a set of MQLDT tests:
+To run a set of MQLDT tests, provide a directory on the volume you wish to test as a parameter to `docker run` and mount it at /var/mqldt:
+```
+docker pull <image_name>
+docker run -itd --volume /var/dvm:/var/mqldt mqldt
+```
+
+The command above mounts /var/dvm from the host into the container at mount point /var/mqldt and will result in the creation of 1GB of test files, so ensure you have enough storage available in the provided directory/fs.
+
+To run against a larger set of files, set the envvar `MQLDT_NUMFILES`:
 ```
 docker pull <image_name>
 docker run -itd --env MQLDT_NUMFILES=64 --volume /var/dvm:/var/mqldt mqldt
 ```
-
 
 The full set of supported docker environment variables are:
 
@@ -20,7 +27,7 @@ The full set of supported docker environment variables are:
 |-------------------------|------------------------------------------------------|--------------------|
 | MQLDT_DIRECTORY         | Directory to store test files                        | /var/mqldt         |
 | MQLDT_NUMFILES          | Number of test files to use                          | 16                 |
-| MQLDT_FILESIZE          | Size of each test file to write to                   | 67108864           |
-| MQLDT_DURATION          | Duration of each test cycle                          | 60                 |
+| MQLDT_FILESIZE          | Size of each test file to write to (bytes)           | 67108864           |
+| MQLDT_DURATION          | Duration of each test cycle (sec)                    | 60                 |
 | MQLDT_CSVFILE           | Name of CSV file where results are logged (Results are also sent to stdout) | mqldt.csv |
 
