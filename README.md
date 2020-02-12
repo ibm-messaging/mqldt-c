@@ -15,7 +15,7 @@ docker run -itd --volume /var/dvm:/var/mqldt mqldt
 
 The command above mounts /var/dvm from the host into the container at mount point /var/mqldt and will result in the creation of 1GB of test files, so ensure you have enough storage available in the provided directory/fs.
 
-To run against a larger set of files, set the envvar `MQLDT_NUMFILES`:
+To run against a larger set of files, set the envvar `MQLDT_NUMFILES`; the following runs with a 4GB set of test files:
 ```
 docker pull <image_name>
 docker run -itd --env MQLDT_NUMFILES=64 --volume /var/dvm:/var/mqldt mqldt
