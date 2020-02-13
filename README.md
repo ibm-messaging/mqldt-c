@@ -5,7 +5,7 @@ It consists of a Dockerfile to create the docker image, mqldt binary executable 
 
 The mqldt binary executable included was compiled in February 2020 on x64. Obviously this can be updated with one built from the mqldt repo [here](https://github.com/ibm-messaging/mqldt).
 
-The image is available [here](http://dontyetknowwheretohost.theimage.com).
+The image is available [here](https://hub.docker.com/r/stmassey/mqldt).
 
 To build your own image, simply clone this repository and run:
 ```
