@@ -3,13 +3,21 @@ This repository contains the Containerized version of mqldt.
 
 It consists of a Dockerfile to create the docker image, mqldt binary executable and scripts to run a set of MQLDT tests.
 
-The mqldt binary executable compiled in February 2020 on x64. Obviously this can be updated with one built from the mqldt repo [here](https://github.com/ibm-messaging/mqldt).
+The mqldt binary executable included was compiled in February 2020 on x64. Obviously this can be updated with one built from the mqldt repo [here](https://github.com/ibm-messaging/mqldt).
 
 The image is available [here](http://dontyetknowwheretohost.theimage.com).
 
+To build your own image, simply clone this repository and run:
+```
+docker build -t mqldt .
+```
+or in a RHEL environment:
+```
+podman build -t mqldt .
+```
+
 To run a set of MQLDT tests, provide a directory on the volume you wish to test as a parameter to `docker run` and mount it at /var/mqldt:
 ```
-docker pull <image_name>
 docker run -itd --volume /var/dvm:/var/mqldt mqldt
 ```
 
@@ -17,7 +25,6 @@ The command above mounts /var/dvm from the host into the container at mount poin
 
 To run against a larger set of files, set the envvar `MQLDT_NUMFILES`; the following runs with a 4GB set of test files:
 ```
-docker pull <image_name>
 docker run -itd --env MQLDT_NUMFILES=64 --volume /var/dvm:/var/mqldt mqldt
 ```
 
