@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo "-------------------------"
-echo "Running MQLDT Tests------"
-echo "-------------------------"
+echo "----------------------------"
+echo "Running MQLDT Tests --------"
+echo "----------------------------"
 echo $(date)
 echo ""
 
@@ -14,8 +14,8 @@ duration=${MQLDT_DURATION:-60}
 
 ./mqldt --dir=$dir --bsize=16K,32K,64K,128K,256K --fileSize=$fileSize --numFiles=$numFiles --csvFile=$csvFile --duration=$duration
 
-echo "-------------------------"
-echo "CSV Results"
-echo "-------------------------"
+echo "----------------------------"
+echo "CSV Results ----------------"
+echo "----------------------------"
 
 cat $csvFile
