@@ -12,7 +12,7 @@ fileSize=${MQLDT_FILESIZE:-67108864}
 numFiles=${MQLDT_NUMFILES:-16}
 duration=${MQLDT_DURATION:-60}
 
-./mqldt --dir=$dir --bsize=16K,32K,64K,128K,256K --fileSize=$fileSize --numFiles=$numFiles --csvFile=$csvFile --duration=$duration
+./mqldt --dir=$dir --bsize=16K,32K,64K,128K,256K,512K --fileSize=$fileSize --numFiles=$numFiles --csvFile=$csvFile --duration=$duration
 
 echo "----------------------------"
 echo "CSV Results ----------------"
