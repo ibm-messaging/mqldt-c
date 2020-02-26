@@ -14,16 +14,17 @@ duration=${MQLDT_DURATION:-60}
 qm=${MQLDT_QM:-1}
 
 if [[ $qm -eq 1 ]]; then
-	./mqldt --dir=$dir --bsize=16K,32K,64K,128K,256K,512K,1024K --fileSize=$fileSize --numFiles=$numFiles --csvFile=$csvFile --duration=$duration
+    ./mqldt --dir=$dir --bsize=16K,32K,64K,128K,256K,512K,1024K --fileSize=$fileSize --numFiles=$numFiles --csvFile=$csvFile --duration=$duration
 else
-	# Create new directories for multi qm
-        for index in 1 .. $qm
-	do
-		mkdir -p $dir/mqldt$index
-	done
-	if [[ $qm -gt 1 ]]; then
-		./mqldt --dir=$dir/mqldt --bsize=128K --fileSize=$fileSize --numFiles=$numFiles --csvFile=$csvFile --duration=$duration --qm=1
-	fi
+    # Create new directories for multi qm
+    mkdir -p $dir/mqldt
+    for index in `seq 1 $qm`
+    do
+        mkdir -p $dir/mqldt$index
+    done
+    if [[ $qm -gt 1 ]]; then
+        ./mqldt --dir=$dir/mqldt --bsize=128K --fileSize=$fileSize --numFiles=$numFiles --csvFile=$csvFile --duration=$duration --qm=1
+    fi
         if [[ $qm -gt 2 ]]; then
                 ./mqldt --dir=$dir/mqldt --bsize=128K --fileSize=$fileSize --numFiles=$numFiles --csvFile=$csvFile --duration=$duration --qm=2
         fi
