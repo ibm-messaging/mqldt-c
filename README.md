@@ -38,4 +38,7 @@ The full set of supported docker environment variables are:
 | MQLDT_FILESIZE          | Size of each test file to write to (bytes)           | 67108864           |
 | MQLDT_DURATION          | Duration of each test cycle (sec)                    | 60                 |
 | MQLDT_CSVFILE           | Name of CSV file where results are logged (Results are also sent to stdout) | mqldt.csv |
+| MQLDT_QM		  | Number of Queue Managers to simulate		 | 1                  |
+
+If you run a simulation with more than one Queue Manager, a 128K block size will be selected and results will be measured for 1,2,4,8,x queue managers up to the stated number. A maximum of 10 queue managers is currently supported. Additional directories mqldt1, mqldt2 etc. will be created within the provided MQLDT_DIRECTORY. Ensure the permissions of the provided directory support this creation and that there is sufficient space available.
 
