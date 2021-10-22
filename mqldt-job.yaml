@@ -11,12 +11,9 @@ spec:
         run: mqldt
     spec:
       containers:
-      - env:
-        - name: IPERF3_HOSTNAME
-          value: iperf3-server
+      - name: mqldt
         image: docker.io/stmassey/mqldt
         imagePullPolicy: Always
-        name: mqldt
         terminationMessagePath: /dev/termination-log
         volumeMounts:
         - name: data
