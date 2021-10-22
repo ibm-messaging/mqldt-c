@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 LABEL maintainer "Sam Massey <smassey@uk.ibm.com>"
 
@@ -38,9 +38,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     sed \
     tar \
     util-linux \
-  # Apply any bug fixes not included in base Ubuntu or MQ image.
-  # Don't upgrade everything based on Docker best practices https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#run
-  # End of bug fixes
   && rm -rf /var/lib/apt/lists/* \
   # Optional: Update the command prompt with the MQ version
   && echo "mqldt" > /etc/debian_chroot \

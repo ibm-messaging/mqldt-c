@@ -1,0 +1,41 @@
+apiVersion: batch/v1 
+kind: Job
+metadata:
+  labels:
+    run: mqldt
+  name: mqldt
+spec:
+  template:
+    metadata:
+      labels:
+        run: mqldt
+    spec:
+      containers:
+      - env:
+        - name: IPERF3_HOSTNAME
+          value: iperf3-server
+        image: docker.io/stmassey/mqldt
+        imagePullPolicy: Always
+        name: mqldt
+        terminationMessagePath: /dev/termination-log
+        volumeMounts:
+        - name: data
+          mountPath: /mnt/mqldt
+        env:
+        - name: MQLDT_DIRECTORY
+          value: /mnt/mqldt
+        resources: 
+          requests:
+            memory: "1Gi"
+            cpu: "4"
+          limits:
+            memory: "1Gi"
+            cpu: "4"
+      dnsPolicy: ClusterFirst
+      restartPolicy: OnFailure
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: mqldt-pvc
