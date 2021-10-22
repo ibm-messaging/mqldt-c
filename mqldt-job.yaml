@@ -21,6 +21,8 @@ spec:
         env:
         - name: MQLDT_DIRECTORY
           value: /mnt/mqldt
+        - name: MQLDT_QM
+          value: "1"
         resources: 
           requests:
             memory: "1Gi"
@@ -36,3 +38,6 @@ spec:
       - name: data
         persistentVolumeClaim:
           claimName: mqldt-pvc
+      securityContext:
+        initVolumeAsRoot: true
+        fsGroup: 999
