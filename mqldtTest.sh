@@ -12,6 +12,7 @@ fileSize=${MQLDT_FILESIZE:-67108864}
 numFiles=${MQLDT_NUMFILES:-16}
 duration=${MQLDT_DURATION:-60}
 qm=${MQLDT_QM:-1}
+blocksize=${MQLDT_BLOCKSIZE:-128K}
 
 if [[ $qm -eq 1 ]]; then
     ./mqldt --dir=$dir --bsize=16K,32K,64K,128K,256K,512K,1024K --fileSize=$fileSize --numFiles=$numFiles --csvFile=$csvFile --duration=$duration
@@ -21,7 +22,7 @@ else
     for index in `seq 1 $qm`
     do
         mkdir -p $dir/mqldt$index
-        ./mqldt --dir=$dir/mqldt --bsize=128K --fileSize=$fileSize --numFiles=$numFiles --csvFile=$csvFile --duration=$duration --qm=$index
+        ./mqldt --dir=$dir/mqldt --bsize=$blocksize --fileSize=$fileSize --numFiles=$numFiles --csvFile=$csvFile --duration=$duration --qm=$index
     done
 fi
 
