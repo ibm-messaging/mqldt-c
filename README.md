@@ -41,6 +41,9 @@ The full set of supported docker environment variables are:
 | MQLDT_QM		  | Number of Queue Managers to simulate		 | 1                  |
 
 If you run a simulation with more than one Queue Manager, a 128K block size will be selected and results will be measured for each queue manager up to the stated number. A maximum of 10 queue managers is currently supported. Additional directories mqldt1, mqldt2 etc. will be created within the provided MQLDT_DIRECTORY. Ensure the permissions of the provided directory support this creation and that there is sufficient space available.
+```
+docker run -itd --env MQLDT_QM=4 --volume /var/dvm:/var/mqldt mqldt
+```
 
 
 ## OCP/Kube
