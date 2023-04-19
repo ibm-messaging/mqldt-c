@@ -12,7 +12,10 @@ spec:
     spec:
       containers:
       - name: mqldt
-        image: docker.io/stmassey/mqldt
+#        image: docker.io/stmassey/mqldt
+#        image: default-route-openshift-image-registry.apps.es02.ocp.hursley.ibm.com/mqldt/mqldt
+#        image: image-registry.openshift-image-registry.svc:5000
+        image: uk.icr.io/mqperf/mqldt
         imagePullPolicy: Always
         terminationMessagePath: /dev/termination-log
         volumeMounts:
