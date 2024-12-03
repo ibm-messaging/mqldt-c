@@ -1,11 +1,11 @@
 # mqldt-c
 This repository contains the Containerized version of mqldt.
 
-It consists of a Dockerfile to create the docker image, mqldt binary executable and scripts to run a set of MQLDT tests.
+It consists of a file to create the image, mqldt binary executable and scripts to run a set of MQLDT tests.
 
 The mqldt binary executable included was compiled in March 2024 on x64. Obviously this can be updated with one built from the mqldt repo [here](https://github.com/ibm-messaging/mqldt).
 
-This repo is no longer built automatically by Docker Hub, but a recent image is available [here](https://hub.docker.com/r/stmassey/mqldt).
+This repo is no longer built automatically by Docker Hub, but a recent image is available [here](https://quay.io/stmassey/mqldt).
 
 To build your own image, simply clone this repository and run:
 ```
@@ -14,7 +14,7 @@ docker build -t mqldt .
 
 To pull the hosted image simply use:
 ```
-docker pull stmassey/mqldt
+docker pull quay.io/stmassey/mqldt
 ```
 
 To run a set of MQLDT tests, provide a directory on the volume you wish to test as a parameter to `docker run` and mount it at /var/mqldt:
@@ -29,7 +29,7 @@ To run against a larger set of files, set the envvar `MQLDT_NUMFILES`; the follo
 docker run -itd --env MQLDT_NUMFILES=64 --volume /var/dvm:/var/mqldt mqldt
 ```
 
-The full set of supported docker environment variables are:
+The full set of supported  environment variables are:
 
 | Envvar                  | Description                                          | Default if not set |
 |-------------------------|------------------------------------------------------|--------------------|
