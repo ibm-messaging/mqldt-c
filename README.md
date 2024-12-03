@@ -29,7 +29,7 @@ To run against a larger set of files, set the envvar `MQLDT_NUMFILES`; the follo
 docker run -itd --env MQLDT_NUMFILES=64 --volume /var/dvm:/var/mqldt mqldt
 ```
 
-The full set of supported  environment variables are:
+The full set of supported environment variables are:
 
 | Envvar                  | Description                                          | Default if not set |
 |-------------------------|------------------------------------------------------|--------------------|
