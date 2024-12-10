@@ -12,25 +12,45 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM registry.access.redhat.com/ubi9/ubi:latest
+FROM quay.io/stmassey/ubuntu
 
 LABEL maintainer "Sam Massey <smassey@uk.ibm.com>"
 
-RUN dnf install -y wget bc file procps procps iputils vim file \
+RUN export DEBIAN_FRONTEND=noninteractive \
   # Install additional packages - do we need/want them all
-  && dnf update \
-  && dnf clean all \
-  && groupadd --gid 30000 mqm \
-  && useradd --uid 30000 --gid mqm mqperf \
+  && apt-get update -y \
+  && apt-get install -y --no-install-recommends \
+    bash \
+    bc \
+    ca-certificates \
+    coreutils \
+    curl \
+    debianutils \
+    file \
+    findutils \
+    gawk \
+    grep \
+    libc-bin \
+    lsb-release \
+    mount \
+    passwd \
+    procps \
+    sed \
+    tar \
+    util-linux \
+  && rm -rf /var/lib/apt/lists/* \
+  # Optional: Update the command prompt with the MQ version
+  && echo "mqldt" > /etc/debian_chroot \
+  && groupadd --system --gid 999 mqm \
+  && useradd --system --uid 999 --gid mqm mqm \
+  && useradd mqperf -G mqm \
   && mkdir -p /home/mqperf/mqldt \
   && chown -R mqperf /home/mqperf/mqldt \
-  # Optional: Update the command prompt with the MQ version
-  && echo "export PS1='mqldt:\u@\h:\w\$ '" >> /home/mqperf/.bashrc \  
   && echo "cd ~/mqldt" >> /home/mqperf/.bashrc
 
-USER mqperf
 COPY mqldt /home/mqperf/mqldt/
 COPY *.sh /home/mqperf/mqldt/
+USER mqperf
 WORKDIR /home/mqperf/mqldt
 
 ENV MQLDT_DIRECTORY=/var/mqldt

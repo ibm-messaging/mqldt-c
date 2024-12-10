@@ -19,7 +19,7 @@ if [[ $qm -eq 1 ]]; then
 else
     # Create new directories for multi qm. 1st QM will use $dir/mqldt. Subsequent QM will use $dir/mqldtx etc.
     mkdir -p $dir/mqldt
-    for index in `seq 1 $qm`
+    for index in $(seq 1 $qm)
     do
         mkdir -p $dir/mqldt$index
         ./mqldt --dir=$dir/mqldt --bsize=$blocksize --fileSize=$fileSize --numFiles=$numFiles --csvFile=$csvFile --duration=$duration --qm=$index
