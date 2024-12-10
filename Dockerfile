@@ -17,14 +17,13 @@ FROM registry.access.redhat.com/ubi9/ubi:latest
 LABEL maintainer "Sam Massey <smassey@uk.ibm.com>"
 
 RUN dnf install -y wget bc file procps procps iputils vim file \
-  # Install additional packages - do we need/want them all
   && dnf update \
   && dnf clean all \
   && groupadd --gid 30000 mqm \
   && useradd --uid 30000 --gid mqm mqperf \
   && mkdir -p /home/mqperf/mqldt \
   && chown -R mqperf /home/mqperf/mqldt \
-  # Optional: Update the command prompt with the MQ version
+  # Update the command prompt with the container name, login and cwd
   && echo "export PS1='mqldt:\u@\h:\w\$ '" >> /home/mqperf/.bashrc \  
   && echo "cd ~/mqldt" >> /home/mqperf/.bashrc
 
