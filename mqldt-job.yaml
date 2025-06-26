@@ -1,4 +1,4 @@
-apiVersion: batch/v1 
+apiVersion: batch/v1
 kind: Job
 metadata:
   labels:
@@ -15,7 +15,8 @@ spec:
 #        image: docker.io/stmassey/mqldt
 #        image: default-route-openshift-image-registry.apps.es02.ocp.hursley.ibm.com/mqldt/mqldt
 #        image: image-registry.openshift-image-registry.svc:5000
-        image: uk.icr.io/mqperf/mqldt
+#        image: uk.icr.io/mqperf/mqldt
+        image: quay.io/stmassey/mqldt
         imagePullPolicy: Always
         terminationMessagePath: /dev/termination-log
         volumeMounts:
@@ -26,7 +27,7 @@ spec:
           value: /mnt/mqldt
         - name: MQLDT_QM
           value: "1"
-        resources: 
+        resources:
           requests:
             memory: "1Gi"
             cpu: "4"
@@ -36,11 +37,16 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: OnFailure
       securityContext: {}
+      securityContext:
+#        capabilities:
+#          drop:
+#            - ALL
+        runAsUser: 30000
       terminationGracePeriodSeconds: 30
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: mqldt-pvc
+          claimName: ebs-gp3-pvc
       securityContext:
         initVolumeAsRoot: true
         fsGroup: 999
